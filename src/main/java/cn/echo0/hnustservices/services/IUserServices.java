@@ -9,4 +9,5 @@ import javax.servlet.http.HttpSession;
  */
 public interface IUserServices {
     boolean doLogin(int stuId,String password,HttpSession session);
+    void doLogout(HttpSession session);
 }

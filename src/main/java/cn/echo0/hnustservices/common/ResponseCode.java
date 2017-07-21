@@ -8,7 +8,8 @@ package cn.echo0.hnustservices.common;
 public enum ResponseCode {
     SUCCESS(0, "success"),
     ERROR(1, "error"),
-    ILLEGAL_ARGUMENT(2, "illegal_argument");
+    ILLEGAL_ARGUMENT(2, "illegal_argument"),
+    INCORRECT_USER_INFO(3,"incorrect stuId or password");
     private final int code;
     private final String desc;
     private ResponseCode(int code, String desc) {

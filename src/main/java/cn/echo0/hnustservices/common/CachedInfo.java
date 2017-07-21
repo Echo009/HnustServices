@@ -11,20 +11,31 @@ import java.util.HashMap;
  */
 public class CachedInfo {
     // 用于缓存用户相关信息
-    private  HashMap<String,Object> cache = new HashMap<>(10);
-    public boolean saveInfo(String key , Object info){
-       if( key!=null&&info!=null&&cache.put(key,info)!=null){
-           return true;
-       }
-       return false;
+    private HashMap<String, Object> cache = new HashMap<>(10);
+
+    public boolean saveInfo(String key, Object info) {
+        if (key != null && info != null && cache.put(key, info) != null) {
+            return true;
+        }
+        return false;
     }
-    public boolean removeInfo(String key){
-        return cache.remove(key)!=null;
+
+    public boolean removeInfo(String key) {
+        return cache.remove(key) != null;
     }
-    public void clearInfo(){
+
+    public void clearInfo() {
         cache.clear();
     }
-    public Object getInfo(String key){
+
+    public Object getInfo(String key) {
         return cache.get(key);
+    }
+
+    @Override
+    public String toString() {
+        return "CachedInfo{" +
+                "cache=" + cache +
+                '}';
     }
 }
