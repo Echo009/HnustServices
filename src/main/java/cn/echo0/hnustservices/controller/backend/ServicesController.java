@@ -2,12 +2,12 @@ package cn.echo0.hnustservices.controller.backend;
 
 import cn.echo0.hnustservices.common.CachedInfo;
 import cn.echo0.hnustservices.common.Const;
-import cn.echo0.hnustservices.common.ResponseCode;
 import cn.echo0.hnustservices.common.ServerResponse;
 import cn.echo0.hnustservices.pojo.StudentGradeAggregation;
 import cn.echo0.hnustservices.services.IGradeServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 @RequestMapping("/services")
+@CrossOrigin(origins = "*")
 public class ServicesController {
     @Autowired
     private IGradeServices iGradeServices;

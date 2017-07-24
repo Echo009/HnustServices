@@ -6,10 +6,7 @@ import cn.echo0.hnustservices.common.ServerResponse;
 import cn.echo0.hnustservices.services.IUserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -20,11 +17,12 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 @RequestMapping("/user")
+@CrossOrigin(origins = "*")
 public class UserController {
     @Autowired
     private IUserServices iUserServices;
 
-    @RequestMapping(value = "/login.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/login.do",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse doLogin(HttpSession session,
                                   @RequestParam(value = "stuId", defaultValue = "0") int stuId,

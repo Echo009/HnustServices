@@ -38,7 +38,7 @@ public class UserServicesImpl implements IUserServices{
     public void doLogout(HttpSession session) {
         // clear info
         CachedInfo info = (CachedInfo) session.getAttribute(Const.CACHED_INFO);
-        info.clearInfo();
+//        info.clearInfo();
         session.removeAttribute(Const.CACHED_INFO);
         // reset login state
         session.setAttribute(Const.LOGIN_STATE,false);
