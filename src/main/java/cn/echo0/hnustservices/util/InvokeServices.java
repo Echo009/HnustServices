@@ -23,11 +23,10 @@ public class InvokeServices {
                 PropertiesUtil.getProperty("LoginService.token", "void") + ";" +
                 stuId + ";" + password;
         try {
-            System.out.println(serviceUrl);
+//            System.out.println(serviceUrl);
             URL targetUrl = new URL(serviceUrl);
             URLConnection conn = targetUrl.openConnection();
             conn.connect();
-            StringBuilder result = new StringBuilder(1 << 10);
             try (BufferedReader in = new BufferedReader(
                     new InputStreamReader(conn.getInputStream(), "utf-8"))) {
                 in.readLine();//skip the empty line

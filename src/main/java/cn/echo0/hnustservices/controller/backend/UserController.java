@@ -1,5 +1,6 @@
 package cn.echo0.hnustservices.controller.backend;
 
+import cn.echo0.hnustservices.common.CachedInfo;
 import cn.echo0.hnustservices.common.Const;
 import cn.echo0.hnustservices.common.ResponseCode;
 import cn.echo0.hnustservices.common.ServerResponse;
@@ -30,7 +31,9 @@ public class UserController {
                                   @RequestParam(value = "stuId", defaultValue = "0") int stuId,
                                   @RequestParam(value = "password", defaultValue = "") String password) {
         //has logined ?
-        if ((boolean) session.getAttribute(Const.LOGIN_STATE)) {
+        boolean hasLogined = (boolean) session.getAttribute(Const.LOGIN_STATE);
+        CachedInfo info = (CachedInfo)session.getAttribute(Const.CACHED_INFO);
+        if (hasLogined&&info!=null) {
             return ServerResponse.createBySuccessMessage("Have logged in !");
         }
         if (stuId == 0 || password.length() == 0) {
@@ -44,8 +47,9 @@ public class UserController {
     @RequestMapping(value = "/logout.do")
     @ResponseBody
     public ServerResponse doLogout(HttpSession session){
+        boolean hasLogined = (boolean) session.getAttribute(Const.LOGIN_STATE);
         //has not logged in
-        if(!(boolean)session.getAttribute(Const.LOGIN_STATE)){
+        if(!hasLogined){
             return ServerResponse.createByError();
         }
         iUserServices.doLogout(session);

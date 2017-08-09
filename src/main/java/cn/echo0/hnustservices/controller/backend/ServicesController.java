@@ -33,15 +33,15 @@ public class ServicesController {
     @ResponseBody
     public ServerResponse getAllGrades(HttpSession session){
 //        has logged ?
-        if (!(boolean)session.getAttribute(Const.LOGIN_STATE)){
+        boolean hasLogined = (boolean) session.getAttribute(Const.LOGIN_STATE);
+        CachedInfo info = (CachedInfo)session.getAttribute(Const.CACHED_INFO);
+        if (!hasLogined||info==null){
             return ServerResponse.createByErrorMessage("need to do login !");
         }
-        CachedInfo info = (CachedInfo) session.getAttribute(Const.CACHED_INFO);
         StudentGradeAggregation aggregation =
                 (StudentGradeAggregation) iGradeServices.qureyGrade((String) info.getInfo(Const.SESSION_ID));
         if(aggregation!=null)
             return ServerResponse.createBySuccess(aggregation);
         else return ServerResponse.createByErrorMessage("need to login again !");
-
     }
 }

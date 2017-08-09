@@ -5,9 +5,7 @@ import cn.echo0.hnustservices.common.Const;
 import cn.echo0.hnustservices.pojo.User;
 import cn.echo0.hnustservices.services.IUserServices;
 import org.springframework.stereotype.Service;
-
 import javax.servlet.http.HttpSession;
-
 import static cn.echo0.hnustservices.util.InvokeServices.getValidSessionId;
 
 /**
@@ -21,13 +19,17 @@ public class UserServicesImpl implements IUserServices{
         String sessionId = getValidSessionId(stuId,password);
         if (sessionId.length()!=0){
             // login successfully
-            CachedInfo info = new CachedInfo();
+            CachedInfo info = (CachedInfo) session.getAttribute(Const.CACHED_INFO);
+            if(info==null){
+                info = new CachedInfo();
+            }
             // save user info
             info.saveInfo(Const.USER,new User(stuId,password));
             // save sessionId
             info.saveInfo(Const.SESSION_ID,sessionId);
             //record loginState
             session.setAttribute(Const.LOGIN_STATE,true);
+            //save cached info
             session.setAttribute(Const.CACHED_INFO,info);
             return true;
         }
@@ -38,8 +40,9 @@ public class UserServicesImpl implements IUserServices{
     public void doLogout(HttpSession session) {
         // clear info
         CachedInfo info = (CachedInfo) session.getAttribute(Const.CACHED_INFO);
-        info.clearInfo();
-        session.removeAttribute(Const.CACHED_INFO);
+        if (info!=null){//nullpointer ?
+            info.clearInfo();
+        }
         // reset login state
         session.setAttribute(Const.LOGIN_STATE,false);
     }
