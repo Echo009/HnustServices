@@ -33,8 +33,7 @@ public class ServicesController {
     @ResponseBody
     public ServerResponse getAllGrades(HttpSession session){
 //        has logged ?
-        if (session.getAttribute(Const.LOGIN_STATE)==null
-                ||!(boolean)session.getAttribute(Const.LOGIN_STATE)){
+        if (!(boolean)session.getAttribute(Const.LOGIN_STATE)){
             return ServerResponse.createByErrorMessage("need to do login !");
         }
         CachedInfo info = (CachedInfo) session.getAttribute(Const.CACHED_INFO);

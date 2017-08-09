@@ -7,6 +7,7 @@ package cn.echo0.hnustservices.util;
 
 import cn.echo0.hnustservices.common.ApiUrl;
 import cn.echo0.hnustservices.pojo.StudentGradeAggregation;
+import com.sun.istack.internal.Nullable;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -15,8 +16,12 @@ import java.util.Properties;
  * @author Ech0
  */
 public class QueryGradeHelper {
-
-    public static String getGradeHtml(String sessionId) {
+    /**
+     * 获取包含成绩信息的html文档
+     * @param sessionId
+     * @return GradeHtml
+     */
+    public static String getGradeHtml(@Nullable  String sessionId) {
         if(sessionId==null||sessionId.length()==0){
             return "";
         }
@@ -29,8 +34,13 @@ public class QueryGradeHelper {
             return "";
         }
     }
-    
-    public static StudentGradeAggregation getGrade(String sessionId) {
+
+    /**
+     * 从html文档中提取成绩信息，存入对象中返回
+     * @param sessionId
+     * @return StudentGradeAggregation that contains all grades info , null if error occurred
+     */
+    public static StudentGradeAggregation getGrade(@Nullable String sessionId) {
         try {
             return ParseHtml.getGradeFromHtml(getGradeHtml(sessionId ));
         } catch (IOException e) {
@@ -39,4 +49,7 @@ public class QueryGradeHelper {
         }
     }
 
+    public static void main(String[] args) {
+        System.out.println(getGrade((String)null));
+    }
 }

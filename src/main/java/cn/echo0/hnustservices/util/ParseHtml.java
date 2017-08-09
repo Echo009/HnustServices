@@ -7,6 +7,7 @@ package cn.echo0.hnustservices.util;
 
 import cn.echo0.hnustservices.pojo.Grade;
 import cn.echo0.hnustservices.pojo.StudentGradeAggregation;
+import com.sun.istack.internal.Nullable;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -88,7 +89,7 @@ public class ParseHtml {
         );
         return aggregation;
     }
-    public static StudentGradeAggregation getGradeFromHtml(String htmlString) throws IOException {
+    public static StudentGradeAggregation getGradeFromHtml(@Nullable String htmlString) throws IOException {
         if (htmlString == null || htmlString.length()<200) {
             return null;
         }

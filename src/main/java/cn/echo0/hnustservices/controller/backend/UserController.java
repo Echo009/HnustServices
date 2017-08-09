@@ -4,6 +4,8 @@ import cn.echo0.hnustservices.common.Const;
 import cn.echo0.hnustservices.common.ResponseCode;
 import cn.echo0.hnustservices.common.ServerResponse;
 import cn.echo0.hnustservices.services.IUserServices;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -21,16 +23,12 @@ import javax.servlet.http.HttpSession;
 public class UserController {
     @Autowired
     private IUserServices iUserServices;
-
+    private static Logger logger =  LoggerFactory.getLogger(UserController.class);
     @RequestMapping(value = "/login.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse doLogin(HttpSession session,
                                   @RequestParam(value = "stuId", defaultValue = "0") int stuId,
                                   @RequestParam(value = "password", defaultValue = "") String password) {
-        // init login state
-        if (session.getAttribute(Const.LOGIN_STATE) == null) {
-            session.setAttribute(Const.LOGIN_STATE, false);
-        }
         //has logined ?
         if ((boolean) session.getAttribute(Const.LOGIN_STATE)) {
             return ServerResponse.createBySuccessMessage("Have logged in !");
@@ -47,8 +45,7 @@ public class UserController {
     @ResponseBody
     public ServerResponse doLogout(HttpSession session){
         //has not logged in
-        if(session.getAttribute(Const.LOGIN_STATE)==null
-                ||!(boolean)session.getAttribute(Const.LOGIN_STATE)){
+        if(!(boolean)session.getAttribute(Const.LOGIN_STATE)){
             return ServerResponse.createByError();
         }
         iUserServices.doLogout(session);

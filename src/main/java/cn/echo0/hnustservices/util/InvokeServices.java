@@ -15,14 +15,15 @@ import java.net.URLConnection;
  * Time   : 07/21/2017 01:27 PM
  */
 public class InvokeServices {
-//    http://echo0.cn:7777?echo0.cn-ironman;stuId;password
-
+//  http://echo0.cn:7777?echo0.cn-ironman;stuId;password
+//    test ok
     public static String getValidSessionId(int stuId, String password) {
         String serviceUrl = "http://" +
                 PropertiesUtil.getProperty("LoginService.host", "localhost") + "?" +
                 PropertiesUtil.getProperty("LoginService.token", "void") + ";" +
                 stuId + ";" + password;
         try {
+            System.out.println(serviceUrl);
             URL targetUrl = new URL(serviceUrl);
             URLConnection conn = targetUrl.openConnection();
             conn.connect();

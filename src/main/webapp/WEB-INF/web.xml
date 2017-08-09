@@ -4,6 +4,11 @@
 
 <web-app>
     <display-name>HnustServices</display-name>
+    <!--log4j配置文件-->
+    <context-param>
+        <param-name>log4jConfigLocation</param-name>
+        <param-value>classpath:log4j.properties</param-value>
+    </context-param>
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
@@ -12,6 +17,8 @@
             classpath:applicationContext.xml
         </param-value>
     </context-param>
+
+
     <filter>
         <filter-name>encoding</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -33,4 +40,10 @@
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
+    <listener>
+        <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>cn.echo0.hnustservices.listener.InitInfoSessionListener</listener-class>
+    </listener>
 </web-app>
