@@ -18,7 +18,7 @@
     <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>-->
 
     <!--使用annotation-driven这个标签可以代替上边的注解处理器映射器以及处理器适配器的配置，并且这个默认加载了很多的参数绑定方法-->
-    <mvc:annotation-driven>
+    <mvc:annotation-driven conversion-service="conversionService">
         <mvc:message-converters>
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
                 <property name="supportedMediaTypes">
@@ -31,5 +31,11 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <list>
+                <bean class="cn.echo0.hnustservices.converter.DateConverter"></bean>
+            </list>
+        </property>
+    </bean>
 </beans>
