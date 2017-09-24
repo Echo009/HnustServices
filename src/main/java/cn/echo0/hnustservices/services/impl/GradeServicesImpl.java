@@ -4,6 +4,7 @@ import cn.echo0.hnustservices.pojo.StudentGradeAggregation;
 import cn.echo0.hnustservices.services.IGradeServices;
 import org.springframework.stereotype.Service;
 
+
 import static cn.echo0.hnustservices.util.QueryGradeHelper.getGrade;
 
 /**
@@ -18,4 +19,7 @@ public class GradeServicesImpl implements IGradeServices {
     public StudentGradeAggregation qureyGrade(String sessionId) {
         return getGrade(sessionId);
     }
+
+
+
 }
